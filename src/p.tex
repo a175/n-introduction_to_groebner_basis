@@ -1,0 +1,698 @@
+% !TeX root =./x2.tex
+% !TeX program = pdfLaTeX
+\chapter{Introduction to Introduction to Gr\"obner basis}
+\label{chap:intro}
+\section{An algebra defined by systems of generators and relations}
+First we see some prototypical examples.
+\subsection{Case 1: Complex numbers.}
+What is a complex number (if you know real numbers)?
+
+For example, let
+\begin{align*}
+  \alpha &= 3i^2 + 1,\\
+  \beta &= -5i^5 + i + 1,\\
+  \gamma &= i(4i^2 - i).
+\end{align*}
+These are complex numbers.
+So, calculate them and check whether $\alpha=\beta$, $\beta=\gamma$,
+and $\gamma=\alpha$.
+For this question, we can answer as follows:
+\begin{align*}
+  \alpha&=3i^2+1=3(-1)+1=-2\\
+  \beta&=-5i^5+i+1=-5(-1)^2i+i+1=-4i+1\\
+  \gamma&=i(4i^2-i)=4i^3-i^2=4(-1)i-(-1)=-4i+1
+\end{align*}
+So $\alpha\neq \beta=\gamma$.
+
+
+What do we do now?
+\begin{enumerate}
+\item Continue the following:
+  \begin{enumerate}
+  \item Expand as a polynomial in the indeterminat (i.e., variable) $i$.
+  \item Substitute $i^2\denotes -1$.
+  \end{enumerate}
+  Every complex number become the form $x+yi$
+  with some $x,y\in\RR$.
+\item For $x,x',y,y'\in\RR$,
+  \begin{align*}
+      x+yi=x'+y'i \iff \begin{cases}x=x'\\y=y'.\end{cases}
+  \end{align*}
+  (In the other words,
+  $\CC$ is a vetorspace over $\RR$ with a basis $\Set{1,i}$.
+  So $\Set{1,i}$ is linearly indenepdent over $\RR$.)
+
+  Hence, if we get this form, then we can check the equality by
+  comparing the coefficients.
+\end{enumerate}
+
+
+
+\begin{remark}
+  The form $x+yi$ is important.
+  For example,
+  \begin{align*}
+  (x,y,z)=(x', y',z') \implies x+yi+zi^2=x'+y'i+z'i^2  
+  \end{align*}
+  is true. The converse is, however, false.
+  The case where $(x,y,z)=(-1,0,0)$ and $(x',y',z')=(0,0,1)$
+  is a counter example.
+\end{remark}
+
+\begin{remark}
+  We call the following problem \emph{the indentification problem}:
+  \begin{quotation}
+    Check the equality of given two elements.
+  \end{quotation}
+\end{remark}
+
+
+\subsection{Case 2: Square roots.}
+What is $\sqrt{5}$ (if you know rational numbers)?
+
+For example, let
+\begin{align*}
+  \alpha &= 3\sqrt{5}^2 + 1,\\
+  \beta &= -\sqrt{5}^5 + 24\sqrt{5}+5,\\
+  \gamma &= \sqrt{5}(\sqrt{5} - 1).
+\end{align*}
+Calculate them and check whether $\alpha=\beta$, $\beta=\gamma$,
+and $\gamma=\alpha$.
+For this question, we can answer as follows:
+\begin{align*}
+  \alpha &= 3\sqrt{5}^2 + 1=3\cdot 5+1=16,\\
+  \beta &= -\sqrt{5}^5 + 24\sqrt{5}+5=-(5)^2\sqrt{5}+24\sqrt{5}+5=-\sqrt{5}+5,\\
+  \gamma &= \sqrt{5}(\sqrt{5} - 1)=\sqrt{5}^2-\sqrt{5}=5-\sqrt{5}=-\sqrt{5}+5.
+\end{align*}
+So $\alpha\neq \beta=\gamma$.
+
+What do we do now?
+\begin{enumerate}
+\item Continue the following:
+  \begin{enumerate}
+  \item Expand as a polynomial in the indeterminat (i.e., variable) $\sqrt{5}$.
+  \item Substitute $\sqrt{5}^2\denotes 5$.
+  \end{enumerate}
+  Every complex number become the form $x+y\sqrt{5}$
+  with some $x,y\in\QQ$.
+\item For $x,x',y,y'\in\QQ$,
+  \begin{align*}
+      x+y\sqrt{5}=x'+y'\sqrt{5} \iff \begin{cases}x=x'\\y=y'.\end{cases}
+  \end{align*}
+  (In the other words,
+  $\Set{1,\sqrt{5}}$ is linearly indenepdent over $\QQ$.)
+
+  Hence, if we get this form, then we can check the equality by
+  comparing the coefficients.
+\end{enumerate}
+
+
+
+\subsection{Case 3: Root of unity.}
+What is  $\omega=-\frac{1}{2}+\frac{\sqrt{3}}{2}i$
+(if you know real numbers)?
+
+Note that
+\begin{align*}
+  \omega&=-\frac{1}{2}+\frac{\sqrt{3}}{2}i\\
+  &=\cos(\frac{2\pi}{3})+\sin(\frac{2\pi}{3})i\\
+  &=e^{\frac{2\pi}{3}i}.
+\end{align*}
+$x=\omega$ is a solution of the equation
+\begin{align*}
+  x^2+x+1=0.
+\end{align*}
+Hence $x=\omega$ is also a solution of the equation $x^3=1$.
+
+For example, let
+\begin{align*}
+  \alpha &= \omega^2+4\omega+7,\\
+  \beta &= -\omega^3 -2\omega,\\
+  \gamma &= \omega(\omega-1).
+\end{align*}
+Calculate them and check whether $\alpha=\beta$, $\beta=\gamma$,
+and $\gamma=\alpha$.
+For this question, we can answer as follows:
+\begin{align*}
+  \alpha &= \omega^2+4\omega+7=(-\omega-1)+4\omega+7=3\omega+6,\\
+  \beta &= -\omega^3 -2\omega= -\omega\omega^2 -2\omega=-\omega(-\omega-1)-2\omega=\omega^2-\omega=(-\omega-1)-\omega=-2\omega-1,\\
+  \gamma &= \omega(\omega-1)=\omega^2-\omega=(-\omega-1)-\omega=-2\omega-1.
+\end{align*}
+So $\alpha\neq \beta=\gamma$.
+
+What do we do now?
+\begin{enumerate}
+\item Continue the following:
+  \begin{enumerate}
+  \item Expand as a polynomial in the indeterminat (i.e., variable) $\omega$.
+  \item Substitute $\omega^2\denotes -omega-1$.
+  \end{enumerate}
+  Every complex number become the form $x+y\omega$
+  with some $x,y\in\RR$.
+\item For $x,x',y,y'\in\RR$,
+  \begin{align*}
+      x+y\omega=x'+y'\omega \iff \begin{cases}x=x'\\y=y'.\end{cases}
+  \end{align*}
+  (In the other words,
+  $\Set{1,\omega}$ is linearly indenepdent over $\RR$.)
+
+  Hence, if we get this form, then we can check the equality by
+  comparing the coefficients.
+\end{enumerate}
+
+\subsection{Case 4: Quvic roots.}
+What is $\left(5^{\frac{1}{3}}\right)=\sqrt[3]{5}$
+(if you know rational numbers)?
+
+For example, let
+\begin{align*}
+  \alpha &= 3\left(5^{\frac{1}{3}}\right)^3+2\left(5^{\frac{1}{3}}\right)^2+4 \left(5^{\frac{1}{3}}\right)+ 7,\\
+  \beta &= -\left(5^{\frac{1}{3}}\right)^6 -\left(5^{\frac{1}{3}}\right)^2+30,\\
+  \gamma &= \left(5^{\frac{1}{3}}\right)^2(\left(5^{\frac{1}{3}}\right) - 1).
+\end{align*}
+Calculate them and check whether $\alpha=\beta$, $\beta=\gamma$,
+and $\gamma=\alpha$.
+For this question, we can answer as follows:
+\begin{align*}
+  \alpha &= \left(5^{\frac{1}{3}}\right)^3+2\left(5^{\frac{1}{3}}\right)^2+4 \left(5^{\frac{1}{3}}\right)+ 7\\
+  &=5+2\left(5^{\frac{1}{3}}\right)^2+4 \left(5^{\frac{1}{3}}\right)+ 7
+  =2\left(5^{\frac{1}{3}}\right)^2+4 \left(5^{\frac{1}{3}}\right)+ 12,\\
+  \beta &= -\left(5^{\frac{1}{3}}\right)^6 -\left(5^{\frac{1}{3}}\right)^2+30\\
+   &= -\left(5^{\frac{1}{3}}\right)^3\left(5^{\frac{1}{3}}\right)^3 -\left(5^{\frac{1}{3}}\right)^2+30\\
+   &= -5\cdot 5 -\left(5^{\frac{1}{3}}\right)^2+30
+   = -\left(5^{\frac{1}{3}}\right)^2+5,\\
+  \gamma &= \left(5^{\frac{1}{3}}\right)^2(\left(5^{\frac{1}{3}}\right) - 1)\\
+  &= \left(5^{\frac{1}{3}}\right)^3 - \left(5^{\frac{1}{3}}\right)^2
+  =5 - \left(5^{\frac{1}{3}}\right)^2.
+\end{align*}
+So $\alpha\neq \beta=\gamma$.
+
+What do we do now?
+\begin{enumerate}
+\item Continue the following:
+  \begin{enumerate}
+  \item Expand as a polynomial in the indeterminat (i.e., variable) $\left(5^{\frac{1}{3}}\right)$.
+  \item Substitute $\left(5^{\frac{1}{3}}\right)^3\denotes 5$.
+  \end{enumerate}
+  Every complex number become the form $x+y\left(5^{\frac{1}{3}}\right)+z\left(5^{\frac{1}{3}}\right)^2$
+  with some $x,y,z\in\QQ$.
+\item For $x,x',y,y',z,z'\in\QQ$,
+  \begin{align*}
+      x+y\left(5^{\frac{1}{3}}\right)+z\left(5^{\frac{1}{3}}\right)^2=x'+y'\left(5^{\frac{1}{3}}\right) +z'\left(5^{\frac{1}{3}}\right)^2\iff \begin{cases}x=x'\\y=y'\\z=z'.\end{cases}
+  \end{align*}
+  (In the other words,
+  $\Set{1,\left(5^{\frac{1}{3}}\right),\left(5^{\frac{1}{3}}\right)^2}$ is linearly indenepdent over $\QQ$.)
+
+  Hence, if we get this form, then we can check the equality by
+  comparing the coefficients.
+\end{enumerate}
+
+
+\section{Summary}
+We consider four cases.
+In each case,
+we caluculate polynomial in an indeterminant with relations.
+To solve identification problem,
+we use the same method in these prototypical cases.
+We will try to generalize these calculations.
+
+\begin{quiz}
+  Consider the golden number
+  \begin{align*}
+    \tau = \frac{1+\sqrt{5}}{2}.
+  \end{align*}
+  Then $\tau$ is a root of the irreducible polynomial
+  \begin{align*}
+    \tau^2-\tau-1.
+  \end{align*}
+  In the other words, $x=\tau$ is a solution of the equation
+  \begin{align*}
+    x^2-x-1=0.
+  \end{align*}
+  Let
+  \begin{align*}
+  \alpha &= \tau^3,\\
+  \beta &= \tau^4-\tau^2-\tau,\\
+  \gamma &= \tau(\tau^2-1).
+  \end{align*}
+Check whether $\alpha=\beta$, $\beta=\gamma$,
+and $\gamma=\alpha$.
+\end{quiz}
+
+\chapter{Our problem}
+\label{chap:ourproblem}
+\section{Summary of \Cref{chap:intro}}
+We consider the following:
+\begin{enumerate}
+\item
+  A polynomial over $\RR$ in the determinat $i$
+  with the relation $i^2+1=0$.
+\item
+  A polynomial over $\QQ$ in the determinat $\sqrt{5}$
+  with the relation $\sqrt{5}^2-5=0$.
+\item
+  A polynomial over $\RR$ in the determinat $\omega$
+  with the relation $\omega^2+\omega+1=0$.
+\item
+  A polynomial over $\QQ$ in the determinat $\left(5^{\frac{1}{3}}\right)$
+  with the relation $\left(5^{\frac{1}{3}}\right)^3-5=0$.
+\item
+  A polynomial over $\RR$ in the determinat $\tau$
+  with the relation $\tau^2-\tau-1=0$.
+\end{enumerate}
+In each case,
+we solve the identification problem by the following strategy:
+\begin{enumerate}
+\item Continue the following:
+  \begin{enumerate}
+  \item Expand as a polynomial
+  \item
+    \label{basicstrategy:item:subs}
+    Substitute the relation as the following form:
+    \begin{align*}
+      \underbrace{\text{monomial}}_{\text{(hightest degree)}}\denotes \underbrace{\text{polynomial}}_{\text{(lower degree)}}.
+    \end{align*}
+  \end{enumerate}
+\item Obtain  a linear combination of linearly indepenedent elements.
+\end{enumerate}
+
+\begin{remark}
+  The substitution in \Cref{basicstrategy:item:subs}
+  is ``one-way''.
+  By the substitution the dgree of polynomial decreases strictly.
+  So, to calculate,
+  we do not need any huristics.
+\end{remark}
+
+In \Cref{chap:ourproblem},
+our motivation is the following question:
+\begin{quotation}
+  What about polynomials with the other relations?
+\end{quotation}
+
+
+\begin{remark}
+  \label{rem:ourprob}
+  In the prototypical cases,
+  we consider the following relations:
+\begin{enumerate}
+\item
+  $i^2+1=0$ (with $\RR$ coefficients).
+\item
+  $\sqrt{5}^2-5=0$ (with $\QQ$ coefficients).
+\item
+  $\omega^2+\omega+1=0$ (with $\RR$ coefficients).
+\item
+  $\left(5^{\frac{1}{3}}\right)^3-5=0$  (with $\QQ$ coefficients).
+\item
+  $\tau^2-\tau-1=0$ (with $\RR$ coefficients).
+\end{enumerate}
+We have some candidate of the meanings of ``the other'' in our motivation.
+For example, we have the following:
+\begin{enumerate}
+\item
+  \label{ourprob:item:1}
+  In each prototipical cases,
+  the relation is defined by an irreducible polynomial.
+  What about non-irreducible polynomials?
+
+\item
+  \label{ourprob:item:2}
+  In each prototypical cases,
+  we consider the unique relation.
+  What about multiple relations?
+
+\item
+  \label{ourprob:item:3}
+  In each prototypical cases,
+  we consider polynomials
+  in one indeterminant.
+  What about multivariable polynoimals?
+\end{enumerate}
+\end{remark}
+
+
+\section{The case of one indeterminant}
+Here we consider the case of  of one indeterminant, and
+we see that our strategy works.
+
+To see it, we define some notion.
+\begin{definition}
+  We call the following proceedure
+  \defit{Division Algorithm}:
+\begin{enumerate}
+\item Continue the following:
+  \begin{enumerate}
+  \item Expand as a polynomial
+  \item
+    \label{basicstrategy:item:subs}
+    Substitute the relation as the following form:
+    \begin{align*}
+      \underbrace{\text{monomial}}_{\text{(hightest degree)}}\denotes \underbrace{\text{polynomial}}_{\text{(lower degree)}}.
+    \end{align*}
+  \end{enumerate}
+\item Obtain  a linear combination of linearly indepenedent elements.
+\end{enumerate}
+We call the monomial with the highest degree in the relation
+the \defit{initial monomial} of the relation.
+\end{definition}
+
+\begin{remark}
+  By each substitution,
+  the degree of the polynoimal
+  decrease strictly.
+  Hence the degree of the polynomial
+  will be less than the degree of the initial term(s) of the relation(s)
+  So,
+  for each starting polynomial
+  (i.e., the  input of algorithm),
+  this proceedure will stop
+  in finitely many steps.
+
+  Note that an ``algorithm'' means
+  a proceedure which will stop in finitely many steps
+  for each input.
+\end{remark}
+
+\subsection{In the case of a unique relation}
+
+First we consider the case of a unique relation.
+This corresponds to our question \Cref{ourprob:item:1} in \Cref{rem:ourprob}.
+
+If our relation is
+\begin{align}
+  x^n\denotes \sum_{i=0}^{n-1}a_ix^i,
+  \label{eq:rel:gen}
+\end{align}
+then $\Set{1,x,\ldots,x^{n-1}}$ is linearly independent.
+In the algebra defined by the indeterminant $x$ with the relation \ref{eq:rel:gen},
+If we use the division algorithm,
+then we obtain a linear combination of $\Set{1,x,\ldots,x^{n-1}}$
+from any polynomial by division algorithm.
+
+
+\begin{remark}
+  [For readers who know algebra]
+  In each prototypical case,
+  we consider a relation defined by an irreducible polynomial.
+  So our algebra defined by the indeterminant with the relation
+  is a field.
+  Hence every nonzero element has its inverse,
+  e.g., $i$ has $i^{-1}=-i$.
+  If a  relation is not irreducible,
+  then the algebra is not a field.
+  The  indeterminant might not have its iverse.
+  This is, however, no problem.
+  Even in this case,
+  the division algorithm works.
+\end{remark}
+
+
+\subsection{In the case of multiple relations}
+
+Next we consider the case where we have some relations.
+This corresponds to our question \Cref{ourprob:item:2} in \Cref{rem:ourprob}.
+
+In this case,
+at first, we modify our relations by division algorithm.
+Then we obtain unique relation which
+implies any other relations.
+So we can apply the case of unique realtion to the relation.
+
+For example, consider the relations
+\begin{align*}
+  \begin{cases}
+    x^8-x^2=0\\
+    x^6-x^2=0.
+  \end{cases}
+\end{align*}
+By the following calculation
+\begin{align*}
+x^8-x^2  \xrightarrow{x^6\Denotes x^2} x^{4}-x^2
+\end{align*}
+of substitution,
+we obtain the relation $x^{4}-x^2=0$
+from $x^8-x^2=0$.
+So our relations are
+\begin{align*}
+  \begin{cases}
+    x^4-x^2=0\\
+    x^6-x^2=0.
+  \end{cases}
+\end{align*}
+Moreover,
+the calculation
+\begin{align*}
+x^6-x^2=x^{4}x^{2}-x^2  \xrightarrow{x^4\Denotes x^2} x^2x^2-x^2=x^{4}-x^2  \xrightarrow{x^4\Denotes x^2} 0,
+\end{align*}
+we obtain the relation $0=0$
+from
+$x^6-x^2$.
+So our relations become
+\begin{align*}
+  \begin{cases}
+    x^4-x^2=0.
+  \end{cases}
+\end{align*}
+Now we obtain unique relation.
+
+\begin{remark}
+  By substitution,
+  the degree of the target relation become less thatn
+  the degree of used relation.
+  Hence, by this modification,
+  all relations except one realtion become $0$.
+  Hence we have a unique relation.
+\end{remark}
+\begin{remark}
+  This modification of relations
+  is equivalent to so-called sEuclidian Algorithm.
+  Hence we can obtain a unique relation as
+  the greatest common divisor of the relations.
+\end{remark}
+\begin{remark}
+    [For readers who know algebra]
+    A polynomial ring in one indeterminant over a field is a PID.
+    Hence every ideal has a system of generators consisting of
+    one element.
+    Therefore we can always apply to the case of unique realtion.
+\end{remark}
+
+
+
+\section{The case of multiple indeterminants}
+Here we consider the case of  of more than one indeterminant.
+In this case, we have some problems
+to apply our strategy works.
+We see problems with examples.
+\subsection{Initial monomial.}
+In the case of one indeterminant,
+the degree induces a total order over monomials.
+Hence we can canonically select the initial term in each polynomial.
+If we have more than one indeterminant,
+then we have no canonical way to select.
+\begin{example}
+  \label{ex:degree}
+  Which term in $x^5y+xy^5+x^4y^4$ is initial?
+
+  If the degree means the degree of $x$,
+  then $x^5y$ is initial.
+  If the degree means the degree of $y$,
+  then $xy^5$ is initial.
+  If the degree means the sum of degrees,
+  then $x^3y^4$ is initial.  
+\end{example}
+
+
+\begin{example}
+  Which term in $x^2+xy+y^2$ is initial?
+
+  If the degree means the sum of degrees,
+  then all monomials are the same.
+\end{example}
+
+\begin{example}
+  Which term in $x+xy$ is initial?
+
+  If the degree means the degrees of $x$,
+  then all monomials are the same.
+\end{example}
+
+
+
+\subsection{Order of substitutions}
+Assume that we can choose the initial monomial for each relation.
+Even if so,
+we have some problem if we have more than one relation.
+
+\begin{remark}
+    [For readers who know algebra]
+    A polynomial ring in more than one indeterminant is not a PID.
+    Hence some ideal has a system of generators consisting of
+    more than one element.
+\end{remark}
+
+
+
+Consider the following two relations:
+\begin{align}
+x^4y^5-y&=0 \label{badex:rel:1}\\
+x^6y^3-x^2y&=0 \label{badex:rel:2}   
+\end{align}
+Assume that
+$x^4y^5$ is the initial monomial of \cref{badex:rel:1}\footnote{Note that the degree of $x^4y^5$ is greater than $y$ in any sense in \Cref{ex:degree}.},
+and that
+$x^6y^3$ is the initial monomial of \cref{badex:rel:2}\footnote{Note that the degree of $x^6y^3$ is greater than $x^2y$ in any sense in \Cref{ex:degree}.}.
+Then
+our relations for substitution are
+\begin{align}
+x^4y^5&\denotes y, \label{badex:relsub:1}\\
+x^6y^3&\denotes x^2y. \label{badex:relsub:2}   
+\end{align}
+
+Let us calculate $x^7y^5$.
+
+If we use \Cref{badex:relsub:1} at first,
+then we obtatin $x^3y$
+by the following substitution:
+\begin{align*}
+  x^7y^5=x^3\cdot x^4y^5
+  \xrightarrow{x^4y^5\Denotes y}
+  x^3y.
+\end{align*}
+We can not apply our relations to $x^3y$.
+Hence we stop here.
+
+If we use \Cref{badex:relsub:2} at first,
+then we obtatin $x^3y^3$
+by the following substitution:
+\begin{align*}
+  x^7y^5=xy^2\cdot x^6y^3
+  \xrightarrow{x^6y^3\Denotes x^2y}
+  xy^2\cdot x^2y=x^3y^3 .
+\end{align*}
+We can not apply our relations to $x^3y^3$.
+Hence we stop here.
+
+We obtain different final forms $x^3y$ and $x^3y^3$ by substitution.
+Since  we obtain $x^3y$ and $x^3y^3$ from the same polynomial,
+these should be the same in our algebra.
+This means that these form are not useful for identification problem.
+
+\section{Summary}
+In the case of one indeterminat,
+we can calculate, or solve identificationproblem,
+by the division algorithm and Euclidean Algorithm.
+
+We also want to calculate in the case of multi-indeterminants,
+but na\"\i ve
+strategy does not work.
+
+\begin{quiz}
+  Consider $\QQ[x]/\Braket{x^{10}+x^4-2,x^9-1,x^6-1}$,
+  i.e.,
+  the algebra defined by $x$ with the relations
+  \begin{align*}
+    x^{10}+x^4-2=0,\\x^9-1=0,\\x^6-1=0.
+  \end{align*}
+  Let
+  \begin{align*}
+    \alpha &= x^5 + x^6,\\
+    \beta &= x^4 + x,\\
+    \gamma &= 2x.
+  \end{align*}
+  Check whether $\alpha=\beta$, $\beta=\gamma$,
+  and $\gamma=\alpha$.
+\end{quiz}
+
+
+\chapter{G\"obner basis}
+\label{chap:defgb}
+\section{Summary of \Cref{chap:ourproblem}}
+We want to calculate in multiindeterminant case.
+We have, however, problems:
+\begin{enumerate}
+\item
+\label{gb:prob:1}
+  We have no canonical way to select the initial monomial.
+\item
+\label{gb:prob:2}
+  The results depends on choice of order of substitutions.
+\end{enumerate}
+In \cref{chap:defgb},
+we give solution for them.
+
+
+\section{Monomial order --- anser for \cref{gb:prob:1}}
+In \cref{chap:defgb},
+we consider polynomials in more than one indeterminant,
+e.g., $x_1,\ldots,x_n$.
+We use so-called multiindex notation defined as follows:
+\begin{definition}
+  For $\aaalpha=(\alpha_1,\ldots,\alpha_n)$
+  and $\xxx=(x_1,\ldots,x_n)$,
+  we define $\xxx^{\aaalpha}$ by
+  \begin{align*}
+    \xxx^{\aaalpha}=
+    x_1^{\alpha_1}\cdots x_n^{\alpha_n}.
+  \end{align*}
+\end{definition}
+
+
+In the case of single indeterminant,
+degree induces a total order over (monic) monomials.
+The order has nice property,
+i.e., compatibility with the product operation.
+Thanks to this property,
+the substitution is ``one-way''.
+We generalize not the degree but this total order.
+
+\begin{definition}[Monomial order]
+  We call $\leq$ a \defit{monomial order}
+  if
+  \begin{enumerate}
+  \item $\leq$ is  a total oder on the set $\Set{\xxx^\aaalpha|\aaalpha\in\NN^n}$ of monic monomials.
+  \item $\xxx^\aaalpha\leq \xxx^\bbbeta \implies \xxx^\gggamma\xxx^\aaalpha\leq \xxx^\gggamma\xxx^\bbbeta $.
+  \item $\forall \xxx^\aaalpha$, $1\leq \xxx^\aaalpha$
+  \end{enumerate}
+\end{definition}
+
+\begin{example}
+  [Lexicographi order]
+  We define $\xxx^\aaalpha < \xxx^\bbbeta $
+  if there exists $i$ such that
+  \begin{align*}
+    &j<i\implies \alpha_j=\beta_j,\\
+    &\alpha_i < \beta_i.
+  \end{align*}
+  Then $\leq$ is a monomial order.
+\end{example}
+\begin{proof}
+  By definition,
+  this is a total order on monomials.
+
+  Let $\xxx^\aaalpha < \xxx^\bbbeta$ and
+   $i$ satisfy
+  \begin{align*}
+    &j<i\implies \alpha_j=\beta_j,\\
+    &\alpha_i < \beta_i.
+  \end{align*}
+  Then 
+  \begin{align*}
+    &j<i\implies \alpha_j+\gamma_j=\beta_j+\gamma_j,\\
+    &\alpha_i+\gamma_j < \beta_i+\gamma_j.
+  \end{align*}
+  Hence $ \xxx^\gggamma\xxx^\aaalpha< \xxx^\gggamma\xxx^\bbbeta$.
+
+
+  Let $\alpha\neq (0,\ldots,0)$ and $i=\min\Set{j|\alpha_j\neq 0}$.
+  Then
+   $i$ satisfies
+  \begin{align*}
+    &j<i\implies 0=\alpha_j,\\
+    &0<\alpha_i.
+  \end{align*}
+  Hence $1=\xxx^{(0,\ldots,0)} < \xxx^\aaalpha$.
+\end{proof}
+
+\section{Gr\"obner basis --- anser for \cref{gb:prob:2}}
