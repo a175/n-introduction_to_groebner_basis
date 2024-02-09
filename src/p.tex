@@ -521,6 +521,7 @@ then we have no canonical way to select.
 
 
 \subsection{Order of substitutions}
+\label{subsec:nonunique}
 Assume that we can choose the initial monomial for each relation.
 Even if so,
 we have some problem if we have more than one relation.
@@ -696,3 +697,188 @@ We generalize not the degree but this total order.
 \end{proof}
 
 \section{Gr\"obner basis --- anser for \cref{gb:prob:2}}
+
+Fix a monomial order $\leq$.
+For substitution,
+we only use relations of the form
+\begin{align*}
+  \underbrace{\xxx^\aaalpha}_{\text{initial monomial}}
+  \denotes
+  \sum_{\bbbeta\colon\bbbeta < \aaalpha}
+  a_\bbbeta \xxx^\bbbeta.
+\end{align*}
+If we use the symbol $\denotes$,
+then we assume that the left hand side is the initial monomial of
+the relation.
+For $c\neq 0$,
+we can transform a relation
+\begin{align*}
+  c\xxx^\aaalpha
+  -
+  \sum_{\bbbeta\colon\bbbeta < \aaalpha}
+  a_\bbbeta \xxx^\bbbeta
+  =0
+\end{align*}
+to our form
+\begin{align*}
+  \xxx^\aaalpha
+  \denotes
+  \frac{1}{c}\sum_{\bbbeta\colon\bbbeta < \aaalpha}
+  a_\bbbeta \xxx^\bbbeta.
+\end{align*}
+uniquely.
+Hence  we identify a polynomial
+\begin{align*}
+  c\underbrace{\xxx^\aaalpha}_{\text{initial monomial}}
+  -
+  \sum_{\bbbeta\colon\bbbeta < \aaalpha}
+  a_\bbbeta \xxx^\bbbeta
+\end{align*}
+with the relation
+\begin{align*}
+  \underbrace{\xxx^\aaalpha}_{\text{initial monomial}}
+  \denotes
+  \frac{1}{c}\sum_{\bbbeta\colon\bbbeta < \aaalpha}
+  a_\bbbeta \xxx^\bbbeta.
+\end{align*}
+
+\begin{definition}[S-polynomial]
+  Consider two realtions
+\begin{align*}
+  \xxx^\aaalpha
+  &\denotes
+  \sum_{\bbbeta\colon\bbbeta < \aaalpha}
+  a_\bbbeta \xxx^\bbbeta,\\
+  \xxx^{\aaalpha'}
+  &\denotes
+  \sum_{\bbbeta'\colon\bbbeta' < \aaalpha'}
+  a_{\bbbeta'} \xxx^{\bbbeta'}.
+\end{align*}
+Let
+\begin{align*}
+  r&=\xxx^{\aaalpha}-\sum_{\bbbeta\colon\bbbeta < \aaalpha} a_\bbbeta \xxx^\bbbeta,\\
+  r'&=\xxx^{\aaalpha'}-\sum_{\bbbeta'\colon\bbbeta' < \aaalpha'} a_{\bbbeta'} \xxx^{\bbbeta'}.
+\end{align*}
+Let $\xxx^{\aaalpha+\gggamma}=\xxx^{\aaalpha'+\gggamma'}$
+be  the least common multiplier for $\xxx^{\aaalpha}$ and $\xxx^{\aaalpha'}$.
+In other words,
+\begin{align*}
+  \gamma_i&=\max\Set{0,\alpha_i'-\alpha_i},\\
+  \gamma'_i&=\max\Set{0,\alpha_i'-\alpha_i}.
+\end{align*}
+We define the S-polynomial $S_{\leq}(r,r')$ of $r$ and  $r'$ by
+\begin{align*}
+  S_{\leq}(r,r')&=
+  -\xxx^{\gggamma}\sum_{\bbbeta\colon\bbbeta < \aaalpha} a_\bbbeta \xxx^\bbbeta
+  +\xxx^{\gggamma'}\sum_{\bbbeta'\colon\bbbeta' < \aaalpha'} a_{\bbbeta'} \xxx^{\bbbeta'}\\
+&=\xxx^\gggamma r- \xxx^{\gggamma'}r'.
+\end{align*}
+\end{definition}
+
+Let $R$ be a set of relations, i.e., polynomials.
+For a polynomial $f$,
+we write
+\begin{align*}
+  f\% R \leadsto f'
+\end{align*}
+to denote that
+we obtain $f'$ from $f$
+by conituuing substitution unless impossible.
+\begin{remark}
+If 
+  \begin{align*}
+  f\% R \leadsto f',
+  \end{align*}
+  then we can not apply division algorithm to $f'$.
+  Hence
+  \begin{align*}
+    f\% R \leadsto f
+  \end{align*}
+  means we can not apply division algorithm to $f'$.
+\end{remark}
+
+\begin{remark}
+  As see in \cref{subsec:nonunique},
+  the following conditions
+  dot not imply $f'=f''$:
+  \begin{align*}
+  &f\% R \leadsto f',\\
+  &f\% R \leadsto f''.
+  \end{align*}
+\end{remark}
+
+\begin{definition}
+  Let $R=\Set{r_1,\ldots,r_l}$ be a set of relations.
+  We call $R$ a \defit{Gr\"obner basis}
+  if
+  \begin{align*}
+    S(r_i,r_j) \% R \leadsto 0
+  \end{align*}
+  for any $i,j$.
+\end{definition}
+\begin{theorem}
+  Let $R=\Set{r_1,\ldots,r_l}$ be a Gr\"obner basis.
+  Let $B$ be the set of monomials $\xxx^\aaalpha$
+  such that any initial monomial $r_i$ does not divide $\xxx^\aaalpha$.
+  \begin{enumerate}
+  \item For each polynomial $f$,
+    there uniquely exsists $f'$ such that
+    \begin{align*}
+      f\% R \leadsto f'.
+    \end{align*}
+  \item If   
+    \begin{align*}
+      f\% R \leadsto f',
+    \end{align*}
+    then $f'$ is a linear combination of $B$.
+  \item $B$ is linearly independent.
+ \end{enumerate}
+\end{theorem}
+
+\begin{remark}
+  If $R$ is a Gr\"obner basis,
+  then
+  the algebra with relations $R$ is a vector space with the basis $B$.
+  Each element in $B$ is called a standard monomial.
+\end{remark}
+
+This is a solution for \cref{gb:prob:2}.
+We, however, have another problem:
+How do we obtain Gr\"obner basis?
+
+
+\begin{theorem}
+  [Buchberger Algorithm]
+  Let $G$ be a set of relations.
+  We can obtain a Gr\"obner basis by continuing the following:
+  If there exist $r$ and $r' \in G$
+  such that $S_{\leq}(r,r')\%G\leadsto c\xxx^\aaalpha-\sum_{\bbbeta\colon \bbbeta<\alpha} a_\bbbeta \xxx^\bbbeta$ with $c\neq 0$,
+  then append $\xxx^\aaalpha\denotes \frac{1}{c}\sum_{\bbbeta\colon \bbbeta<\alpha} a_\bbbeta \xxx^\bbbeta$
+  to $G$.
+
+  The algebra defined by indeterminants with original relations
+  is the same as the algebra defined by indeterminants with resulting Gr\"obner basis.
+\end{theorem}
+
+\begin{remark}
+  Buchberger Algorithm is Euclidian Algorithm  in the case of single indeterminant.
+  Buchberger Algorithm is Gaussian Elimination
+  in the case where the relations are polynoimals of degree one.
+\end{remark}
+
+\begin{example}
+  Consider $\QQ[x,y]/\Braket{x^4y^5-y,x^6y^3-x^2y}$.
+  Calculate Gr\"obner basis by Buchberger Algorithm
+\end{example}
+
+\begin{quiz}
+  Consider $\QQ[x,y]/\Braket{x^4y^5-y,x^6y^3-x^2y}$.
+  Let
+  \begin{align*}
+    \alpha &= x^5y^5,\\
+    \beta &= x^7y,\\
+    \gamma &= x^3y^3.
+  \end{align*}
+  Check whether $\alpha=\beta$, $\beta=\gamma$,
+  and $\gamma=\alpha$.
+\end{quiz}
