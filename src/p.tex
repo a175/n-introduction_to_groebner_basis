@@ -607,7 +607,7 @@ strategy does not work.
 \end{quiz}
 
 
-\chapter{G\"obner basis}
+\chapter{Gr\"obner basis}
 \label{chap:defgb}
 \section{Summary of \Cref{chap:ourproblem}}
 We want to calculate in multiindeterminant case.
@@ -779,7 +779,7 @@ Let $R$ be a set of relations, i.e., polynomials.
 For a polynomial $f$,
 we write
 \begin{align*}
-  f\% R \leadsto f'
+  f\modulo R \leadsto f'
 \end{align*}
 to denote that
 we obtain $f'$ from $f$
@@ -787,12 +787,12 @@ by conituuing substitution unless impossible.
 \begin{remark}
 If 
   \begin{align*}
-  f\% R \leadsto f',
+  f\modulo R \leadsto f',
   \end{align*}
   then we can not apply division algorithm to $f'$.
   Hence
   \begin{align*}
-    f\% R \leadsto f
+    f\modulo R \leadsto f
   \end{align*}
   means we can not apply division algorithm to $f'$.
 \end{remark}
@@ -802,8 +802,8 @@ If
   the following conditions
   dot not imply $f'=f''$:
   \begin{align*}
-  &f\% R \leadsto f',\\
-  &f\% R \leadsto f''.
+  &f\modulo R \leadsto f',\\
+  &f\modulo R \leadsto f''.
   \end{align*}
 \end{remark}
 
@@ -812,7 +812,7 @@ If
   We call $R$ a \defit{Gr\"obner basis}
   if
   \begin{align*}
-    S(r_i,r_j) \% R \leadsto 0
+    S(r_i,r_j) \modulo R \leadsto 0
   \end{align*}
   for any $i,j$.
 \end{definition}
@@ -824,11 +824,11 @@ If
   \item For each polynomial $f$,
     there uniquely exsists $f'$ such that
     \begin{align*}
-      f\% R \leadsto f'.
+      f\modulo R \leadsto f'.
     \end{align*}
   \item If   
     \begin{align*}
-      f\% R \leadsto f',
+      f\modulo R \leadsto f',
     \end{align*}
     then $f'$ is a linear combination of $B$.
   \item $B$ is linearly independent.
@@ -852,7 +852,7 @@ How do we obtain Gr\"obner basis?
   Let $G$ be a set of relations.
   We can obtain a Gr\"obner basis by continuing the following:
   If there exist $r$ and $r' \in G$
-  such that $S_{\leq}(r,r')\%G\leadsto c\xxx^\aaalpha-\sum_{\bbbeta\colon \bbbeta<\alpha} a_\bbbeta \xxx^\bbbeta$ with $c\neq 0$,
+  such that $S_{\leq}(r,r')\modulo G\leadsto c\xxx^\aaalpha-\sum_{\bbbeta\colon \bbbeta<\alpha} a_\bbbeta \xxx^\bbbeta$ with $c\neq 0$,
   then append $\xxx^\aaalpha\denotes \frac{1}{c}\sum_{\bbbeta\colon \bbbeta<\alpha} a_\bbbeta \xxx^\bbbeta$
   to $G$.
 
@@ -868,7 +868,115 @@ How do we obtain Gr\"obner basis?
 
 \begin{example}
   Consider $\QQ[x,y]/\Braket{x^4y^5-y,x^6y^3-x^2y}$.
-  Calculate Gr\"obner basis by Buchberger Algorithm
+  Calculate Gr\"obner basis
+  with respect to the lexicographic order
+  by Buchberger Algorithm.
+  Let $G=\Set{f_1=x^6y^3-x^2y,f_2=x^4y^5-y}$.
+  The S-polynomial is
+  \begin{align*}
+    S_{\leq}(f_2,f_1)=
+    x^2(x^4y^5-y)
+    -y^2(x^6y^3-x^2y)
+    =-x^2y+x^2y^3.
+  \end{align*}
+  We can not substitute our relations to $x^2y^3-x^2y$.
+  We append the polynomial and now we have 
+  $G=\Set{f_1,f_2,f_3=x^2y^3-x^2y}$.
+  Now $S_{\leq}(f_1,f_2) \modulo G \leadsto 0$.
+  For $f_2,f_3$, we have
+  \begin{align*}
+    S_{\leq}(f_2,f_3)=
+    (x^4y^5-y)
+    -x^2y^2(x^2y^3-x^2y)
+    =-y+x^4y^3
+\xrightarrow{x^2y^3\Denotes x^2y}
+    -y+x^4y.
+  \end{align*}
+  We append the polynomial and now we have 
+  $G=\Set{f_1,f_2,f_3,f_4=x^4y-y}$.
+  Now $S_{\leq}(f_2,f_3) \modulo G \leadsto 0$.
+  For $f_3,f_4$, we have
+  \begin{align*}
+    S_{\leq}(f_3,f_4)=
+    x^2(x^2y^3-x^2y)
+    -y^2(x^4y-y)
+    =-x^4y+y^3
+\xrightarrow{x^4y\Denotes y}
+    -y+y^3.
+  \end{align*}
+  We append the polynomial and now we have 
+  $G=\Set{f_1,f_2,f_3,f_4,f_5=y^3-y}$.
+  Now $S_{\leq}(f_3,f_4) \modulo G \leadsto 0$.
+  For $f_4,f_5$, we have
+  \begin{align*}
+    S_{\leq}(f_4,f_5)=
+    y^2(x^4y-y)
+    -x^4(y^3-y)
+    =-y^3+x^4y
+\xrightarrow{x^4y\Denotes y}
+-y^3+y
+\xrightarrow{y^3\Denotes y}
+    0.
+  \end{align*}
+  For $f_1,f_3$, we have
+  \begin{align*}
+    S_{\leq}(f_1,f_3)=
+    (x^6y^3-x^2y)
+    -x^4(x^2y^3-x^2y)
+    =-x^2y+x^6y
+\xrightarrow{x^4y\Denotes y}
+    -x^2y+x^2y=0.
+  \end{align*}
+  For $f_2,f_4$, we have
+  \begin{align*}
+    S_{\leq}(f_2,f_4)=
+    (x^4y^5-y)
+    -y^4(x^4y-y)
+    =-y+y^5
+\xrightarrow{y^3\Denotes y}
+    -y+y^3
+\xrightarrow{y^3\Denotes y}
+    -y+y=0.
+  \end{align*}
+  For $f_3,f_5$, we have
+  \begin{align*}
+    S_{\leq}(f_3,f_5)=
+    (x^2y^3-x^2y)
+    -x^2(y^3-y)
+    =-x^2y+x^2y=0.
+  \end{align*}
+  For $f_1,f_4$, we have
+  \begin{align*}
+    S_{\leq}(f_1,f_4)=
+    (x^6y^3-x^2y)
+    -x^2y^2(x^4y-y)
+    =-x^2y+x^2y^3
+    \xrightarrow{y^3\Denotes y}
+    -x^2y+x^2y=0.
+  \end{align*}
+  For $f_2,f_5$, we have
+  \begin{align*}
+    S_{\leq}(f_2,f_5)=
+    (x^4y^5-y)
+    -x^4y^2(y^3-y)
+    =-y+x^4y^3
+\xrightarrow{y^3\Denotes y}
+    -y+x^4y
+\xrightarrow{x^4y\Denotes y}
+    -y+y=0.
+  \end{align*}
+  For $f_1,f_5$, we have
+  \begin{align*}
+    S_{\leq}(f_2,f_5)=
+    (x^6y^3-x^2y)
+    -x^6(y^3-y)
+    =-x^2y+x^6y
+\xrightarrow{x^4y\Denotes y}
+-x^2y+x^2y=0.
+  \end{align*}
+Hence   
+$G=\Set{f_1,f_2,f_3,f_4,f_5}$ is
+a Gr\"obner basis.
 \end{example}
 
 \begin{quiz}
